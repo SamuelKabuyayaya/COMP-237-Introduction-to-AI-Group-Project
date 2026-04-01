@@ -1,4 +1,5 @@
 import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
 
 #Task 1: Loading the data and looking at it
 df = pd.read_csv('Youtube02-KatyPerry.csv')
@@ -28,3 +29,12 @@ print(str(df.shape[1]) + " columns")
 #2.5 Checking for missing values
 print("Checking for missing values")    
 print(df.isnull().sum())
+
+#Task 3: Data preparation for model building
+#3.1 Creating the CounterVectorizer for The "Bag of Words" model
+count_vectorizer = CountVectorizer()
+
+#3.2 Transfoming text into numerical matrix 
+X_counts = count_vectorizer.fit_transform(df['CONTENT'])
+print("Bag of words preparation done.")
+
