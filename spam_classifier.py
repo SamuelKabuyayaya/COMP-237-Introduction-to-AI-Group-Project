@@ -1,5 +1,6 @@
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfTransformer
 
 #Task 1: Loading the data and looking at it
 df = pd.read_csv('Youtube02-KatyPerry.csv')
@@ -66,3 +67,38 @@ print(feature_names[:10])
 print("")
 print("Numerical representation of the first comment:")
 print(X_counts[0, :10].toarray())
+
+#Task 5: Downscaling the transformed data using tf-idf
+#5.1 Creating the tf-idf transformer
+tfidf_transformer = TfidfTransformer()
+
+#5.2 Transforming the count matrix into tf-idf features
+X_tfidf = tfidf_transformer.fit_transform(X_counts)
+
+print("")
+print("TF-IDF downscaling done.")
+
+#5.3 Showing highlights of final features
+print("")
+print("Final Features:")
+
+# Shape
+print("New data shape after tf-idf: " + str(X_tfidf.shape))
+
+# Example values
+print("")
+print("TF-IDF representation of first comment:")
+print(X_tfidf[0, :10].toarray())
+
+# Non-zero values
+print("")
+print("Number of non-zero values:")
+print(X_tfidf.nnz)
+
+#Task 6: Shuffling the dataset
+df = df.sample(frac=1)
+
+print("")
+print("Dataset shuffled.")
+print(df.head())
+
