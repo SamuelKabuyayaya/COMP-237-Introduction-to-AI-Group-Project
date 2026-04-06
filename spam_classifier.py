@@ -18,7 +18,6 @@ print(df.head())
 df = df.sample(frac=1)
 
 print("\nDataset shuffled.")
-print("Dataset shuffled.")
 print(df.head())
 
 #Task 2 Basic Data Exploration
@@ -160,3 +159,26 @@ print(f"True Negatives  (Correct Ham): {conf_matrix[0][0]}")
 print(f"False Positives (Ham marked as Spam): {conf_matrix[0][1]}")
 print(f"False Negatives (Spam marked as Ham): {conf_matrix[1][0]}")
 print(f"True Positives  (Correct Spam): {conf_matrix[1][1]}")
+
+# 11.1 Creating the list of comments (4 Ham, 2 Spam)
+new_comments = [
+    "I absolutely love this song, Katy is the best! ❤️",        # Ham
+    "The cinematography in this video is stunning.",            # Ham
+    "Big Chungus",                                              # Ham
+    "Who's here in 2026? 💀",                                   # Ham
+    "FREE V-BUCKS AND GIFTS!! CLICK HERE -> http://vbucks.com",   # Spam
+    "Check out my profile for cheap followers and likes!"       # Spam
+]
+
+# 11.2 Transforming the new comments using our existing tools. We use transform(), NOT fit_transform() here
+new_counts = count_vectorizer.transform(new_comments)
+new_tfidf = tfidf_transformer.transform(new_counts)
+
+# 11.3 Making predictions
+predictions = model.predict(new_tfidf)
+
+# 11.4 Showing results
+for i in range(len(new_comments)):
+    result = "SPAM" if predictions[i] == 1 else "HAM"
+    print(f"\nComment: {new_comments[i]}")
+    print(f"Prediction: {result}\n")
