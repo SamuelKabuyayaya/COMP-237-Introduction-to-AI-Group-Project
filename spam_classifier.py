@@ -2,11 +2,24 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 
+from sklearn.naive_bayes import MultinomialNB
+
+from sklearn.model_selection import cross_val_score
+
+from sklearn.metrics import confusion_matrix, accuracy_score
+
 #Task 1: Loading the data and looking at it
 df = pd.read_csv('Youtube02-KatyPerry.csv')
 
 print("")
 print("Looking at data")
+print(df.head())
+
+#Task 6: Shuffling the dataset
+df = df.sample(frac=1)
+
+print("")
+print("Dataset shuffled.")
 print(df.head())
 
 #Task 2 Basic Data Exploration
@@ -95,10 +108,29 @@ print("")
 print("Number of non-zero values:")
 print(X_tfidf.nnz)
 
-#Task 6: Shuffling the dataset
-df = df.sample(frac=1)
+# 7.1 Calculate the split index
+# We take 75% of the total number of rows
+train_size = int(0.75 * len(df))
 
+# 7.2 Separating Features (X) and Target (y) X is our TF-IDF matrix, y is the CLASS column from our shuffled dataframe
+X = X_tfidf
+y = df['CLASS']
+
+# 7.3 Manual splitting using indexing
+# Training data 75%
+X_train = X[:train_size]
+y_train = y[:train_size]
+
+# Testing data 25%
+X_test = X[train_size:]
+y_test = y[train_size:]
+
+print("Manual Split Done")
+print(f"Training set size: {X_train.shape[0]} samples")
+print(f"Testing set size:  {X_test.shape[0]} samples")
+
+# Showing separation
 print("")
-print("Dataset shuffled.")
-print(df.head())
+print(f"Features (X) shape: {X.shape}")
+print(f"Target (y) shape:   {y.shape}")
 
