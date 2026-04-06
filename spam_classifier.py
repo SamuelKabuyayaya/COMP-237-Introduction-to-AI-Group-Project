@@ -142,3 +142,15 @@ model.fit(X_train, y_train)
 
 print("Model Training Fitting")
 print("The Naive Bayes classifier has been trained on 75% of the data.")
+
+# 9.1 Performing 5-fold cross validation. We use only the training data (X_train, y_train) as per instructions
+scores = cross_val_score(model, X_train, y_train, cv=5)
+
+print("5-Fold Cross-Validation Results")
+
+# 9.2 Print individual scores for each fold
+print(f"Accuracy for each fold: {scores}")
+
+# 9.3 Printing the mean result (Average accuracy)
+print(f"Mean Accuracy: {scores.mean():.4f}")
+print(f"Standard Deviation: {scores.std():.4f}")
