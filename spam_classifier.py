@@ -134,3 +134,11 @@ print("")
 print(f"Features (X) shape: {X.shape}")
 print(f"Target (y) shape:   {y.shape}")
 
+# 8.1 Initialize the Naive Bayes classifier. MultinomialNB often used for text classification
+model = MultinomialNB()
+
+# 8.2 Train (Fit) the model. We give it the training features (X_train) and the correct answers (y_train)
+model.fit(X_train, y_train)
+
+print("Model Training Fitting")
+print("The Naive Bayes classifier has been trained on 75% of the data.")
