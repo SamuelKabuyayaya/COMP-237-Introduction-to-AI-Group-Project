@@ -1,17 +1,14 @@
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
-
 from sklearn.naive_bayes import MultinomialNB
-
 from sklearn.model_selection import cross_val_score
-
 from sklearn.metrics import confusion_matrix, accuracy_score
 
 #Task 1: Loading the data and looking at it
 df = pd.read_csv('Youtube02-KatyPerry.csv')
 
-print("\nLooking at data")
+print("\nLooking at data for the first time:")
 print(df.head())
 
 #Task 6: Shuffling the dataset
